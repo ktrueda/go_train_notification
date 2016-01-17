@@ -12,7 +12,7 @@ import (
 //電車運行情報の情報源
 const TRAIN_URL = "http://transit.yahoo.co.jp/traininfo/area/4/"
 const SLACK_URL = "https://slack.com/api/chat.postMessage"
-const config_filename = "./config.json"
+const CONFIG_FILENAME = "./config.json"
 
 type Config struct {
 	Trains []string
@@ -55,7 +55,7 @@ func Parse(filename string) (Config, error) {
 }
 
 func main() {
-	config, err := Parse(config_filename)
+	config, err := Parse(CONFIG_FILENAME)
 	fmt.Printf("%v", config)
 	if err != nil {
 		fmt.Printf("error:%v", err)
