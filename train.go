@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 //電車運行情報の情報源
@@ -56,7 +57,7 @@ func Parse(filename string) (Config, error) {
 
 func main() {
 	config, err := Parse(CONFIG_FILENAME)
-	fmt.Printf("%v", config)
+	// fmt.Printf("%v", config)
 	if err != nil {
 		fmt.Printf("error:%v", err)
 		return
@@ -64,6 +65,9 @@ func main() {
 	status := Status()
 	status_str := ""
 	for _, train := range config.Trains {
+		if strings.Contains(status[train], "平常運転"){
+			continue
+		}
 		status_str += fmt.Sprintf("%s : %s\n", train, status[train])
 	}
 
